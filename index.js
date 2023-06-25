@@ -28,7 +28,7 @@ function videoEncode(url, stream) {
             })
             .on('error', (err) => {
                 //console.log(err)
-                reject(err)
+                reject(`stream: ${stream} error: ${err}`)
             })
             .on('end', () => {
                 //console.log("done")
