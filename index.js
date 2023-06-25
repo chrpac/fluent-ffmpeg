@@ -17,6 +17,10 @@ ffmpeg()
     //.audioChannels(2)
     .videoBitrate(150)
     .save("./output/out.mp4")
+    .on('codecData', function (data) {
+        console.log('Input is ' + data.audio + ' audio ' +
+            'with ' + data.video + ' video');
+    })
     .on('error', (err) => {
         console.log(err)
     })
