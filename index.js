@@ -35,22 +35,23 @@ function videoEncode(url, stream) {
                 resolve('done');
             });
 
+        const stop = (movie) => {
+            return movie.ffmpegProc.stdin.write('q');
+        }
+
         setTimeout(function () {
             encode.on('error', function () {
                 //console.log('Ffmpeg has been killed');
                 resolve('killed', stream)
             });
 
-            //stop(encode);
-            encode.ffmpegProc.stdin.write('q');
+            stop(encode);
         }, 60000);
     })
 }
 
 
-const stop = (movie) => {
-    return movie.ffmpegProc.stdin.write('q');
-}
+
 
 // videoEncode(config.url)
 //     .then(result => console.log(result))
