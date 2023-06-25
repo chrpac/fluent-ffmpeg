@@ -19,7 +19,7 @@ function videoEncode(url, stream) {
             //.audioBitrate(128)
             //.audioChannels(2)
             .videoBitrate(150)
-            .save("./output/out.mp4")
+            .save(`./output/${stream}.mp4`)
             .on('start', function () {
                 console.log(`Start Encoding: ${stream}`)
             })
