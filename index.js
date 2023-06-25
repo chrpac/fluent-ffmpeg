@@ -27,10 +27,14 @@ let encode = ffmpeg()
         console.log("done")
     });
 
+const stop = (movie) => {
+    return movie.ffmpegProc.stdin.write('q');
+}
+
 setTimeout(function () {
     encode.on('error', function () {
         console.log('Ffmpeg has been killed');
     });
 
-    encode.kill();
+    stop(encode);
 }, 60000);
