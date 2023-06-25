@@ -1,7 +1,7 @@
 var ffmpeg = require('fluent-ffmpeg');
 
 ffmpeg()
-    .input("https://livestream.advanceagro.net/hls/0001.m3u8")
+    .input("x")
     .inputOption([
         "-vsync 0",
         "-hwaccel cuvid",
