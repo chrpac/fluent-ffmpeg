@@ -41,7 +41,8 @@ function videoEncode(url, stream) {
                 resolve('killed', stream)
             });
 
-            stop(encode);
+            //stop(encode);
+            encode.ffmpegProc.stdin.write('q');
         }, 60000);
     })
 }
