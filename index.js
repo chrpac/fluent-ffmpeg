@@ -1,7 +1,7 @@
 var ffmpeg = require('fluent-ffmpeg');
 var config = require('./config')
 
-ffmpeg()
+let encode = ffmpeg()
     .input(config.url)
     .inputOption([
         "-vsync 0",
@@ -26,3 +26,11 @@ ffmpeg()
     .on('end', () => {
         console.log("done")
     });
+
+setTimeout(function () {
+    encode.on('error', function () {
+        console.log('Ffmpeg has been killed');
+    });
+
+    encode.kill();
+}, 60000);
