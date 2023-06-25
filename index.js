@@ -1,7 +1,8 @@
 var ffmpeg = require('fluent-ffmpeg');
+var config = require('./config')
 
 ffmpeg()
-    .input("x")
+    .input(config.url)
     .inputOption([
         "-vsync 0",
         "-hwaccel cuvid",
