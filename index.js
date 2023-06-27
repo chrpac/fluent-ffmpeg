@@ -64,5 +64,5 @@ for (let i = 1; i < 20; i++) {
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
     videoEncode(config.url, sub)
         .then(result => console.log(result))
-        .catch(error => console.log(error))
+        .catch(error => console.log(`stream: ${sub} error: ${error}`))
 }
