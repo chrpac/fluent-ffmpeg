@@ -33,7 +33,7 @@ function videoEncode(url, stream) {
                 // }, 30000);
             })
             .on('progress', function (progress) {
-                //console.log('Processing: ');
+                console.log('Processing: ' + stream);
             })
             .on('codecData', function (data) {
                 console.log('Stream ' + stream + ' Input is ' + data.audio + ' audio ' +
