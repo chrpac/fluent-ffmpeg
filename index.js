@@ -20,6 +20,9 @@ function videoEncode(url, stream) {
             //.audioCodec('aac')
             //.audioBitrate(128)
             //.audioChannels(2)
+            .outputOptions([
+                "-preset fast"
+            ])
             .videoBitrate(100)
             .frames(150)
             .save(`./output/${stream}.mp4`)
