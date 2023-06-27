@@ -57,7 +57,7 @@ function videoEncode(url, stream) {
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error))
 
-for (let i = 1; i < 20; i++) {
+for (let i = 1; i < 2; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
     videoEncode(config.url, sub)
