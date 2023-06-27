@@ -14,7 +14,7 @@ function videoEncode(url, stream) {
                 "-c:v h264_cuvid"
             ])
             .videoCodec("h264_nvenc")
-            .videoFilter("fps=3")
+            .videoFilter("fps=5")
             .noAudio()
             //.native()
             //.audioCodec('aac')
