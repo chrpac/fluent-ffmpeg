@@ -21,18 +21,16 @@ function videoEncode(url, stream) {
             //.audioBitrate(128)
             //.audioChannels(2)
             .videoBitrate(100)
+            .frames(150)
             .save(`./output/${stream}.mp4`)
             .on('start', function () {
                 console.log(`Start Encoding: ${stream}`)
-                setTimeout(function () {
-                    encode.on('error', function () {
-                        //console.log('Ffmpeg has been killed');
-                        resolve('killed', stream)
-                    });
-
-                    //stop(encode);
-                    if (!crash) encode.ffmpegProc.stdin.write('q');
-                }, 30000);
+                // setTimeout(function () {
+                //     encode.on('error', function () {
+                //         resolve('killed', stream)
+                //     });
+                //     if (!crash) encode.ffmpegProc.stdin.write('q');
+                // }, 60000);
             })
             .on('progress', function (progress) {
                 //console.log('Processing: ' + stream);
