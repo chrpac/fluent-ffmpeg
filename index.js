@@ -66,7 +66,7 @@ function videoEncode(url, stream) {
 for (let i = 1; i < 6; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
-    fetch(config.url + sub)
+    fetch(config.url + sub + 'm3u8')
         .then((response) => {
             console.log(`Sub ${sub} can reach`)
             console.log(response)
