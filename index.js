@@ -34,7 +34,7 @@ function videoEncode(url, stream) {
                 }, 30000);
             })
             .on('progress', function (progress) {
-                console.log('Processing: ' + stream);
+                //console.log('Processing: ' + stream);
             })
             .on('codecData', function (data) {
                 console.log('Stream ' + stream + ' Input is ' + data.audio + ' audio ' +
@@ -66,7 +66,7 @@ function videoEncode(url, stream) {
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error))
 
-for (let i = 1; i < 6; i++) {
+for (let i = 1; i < 30; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
     // fetch(config.url + sub + '.m3u8')
