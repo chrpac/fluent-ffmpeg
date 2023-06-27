@@ -8,13 +8,13 @@ function videoEncode(url, stream) {
         let encode = new Ffmpeg()
             .input(link)
             .inputOption([
-                //"-vsync 0",
-                //"-hwaccel cuvid",
-                //"-hwaccel_device 0",
+                "-vsync 0",
+                "-hwaccel cuvid",
+                "-hwaccel_device 0",
                 "-c:v h264_cuvid"
             ])
             .videoCodec("h264_nvenc")
-            .videoFilter("fps=3,hwupload_cuda,scale_npp=640:-1")
+            .videoFilter("fps=3")
             .noAudio()
             //.native()
             //.audioCodec('aac')
