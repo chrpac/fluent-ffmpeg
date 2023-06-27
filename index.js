@@ -63,10 +63,17 @@ function videoEncode(url, stream) {
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error))
 
-for (let i = 1; i < 2; i++) {
+for (let i = 1; i < 6; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
-    videoEncode(config.url, sub)
-        .then(result => console.log(result))
-        .catch(error => console.log(`stream: ${sub} error: ${error}`))
+    fetch(config.url + sub)
+        .then((response) => {
+            console.log(`Sub ${sub} can reach`)
+        })
+        .catch(function (err) {
+            console.log("Unable to fetch -", err);
+        });
+    // videoEncode(config.url, sub)
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log(`stream: ${sub} error: ${error}`))
 }
