@@ -1,3 +1,4 @@
 module.exports = {
-    url: 'x'
+    url: 'x',
+    loop: 2
 }
