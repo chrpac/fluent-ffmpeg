@@ -18,7 +18,7 @@ function videoEncode(url, stream) {
             //.audioCodec('aac')
             //.audioBitrate(128)
             //.audioChannels(2)
-            .videoBitrate(150)
+            .videoBitrate(100)
             .save(`./output/${stream}.mp4`)
             .on('start', function () {
                 console.log(`Start Encoding: ${stream}`)
@@ -46,7 +46,7 @@ function videoEncode(url, stream) {
             });
 
             stop(encode);
-        }, 60000);
+        }, 30000);
     })
 }
 
@@ -57,7 +57,7 @@ function videoEncode(url, stream) {
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error))
 
-for (let i = 1; i < 2; i++) {
+for (let i = 1; i < 20; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
     videoEncode(config.url, sub)
