@@ -69,6 +69,7 @@ for (let i = 1; i < 6; i++) {
     fetch(config.url + sub)
         .then((response) => {
             console.log(`Sub ${sub} can reach`)
+            console.log(response)
         })
         .catch(function (err) {
             console.log("Unable to fetch -", err);
