@@ -3,6 +3,7 @@ var config = require('./config')
 
 function videoEncode(url, stream) {
     const link = url + stream + '.m3u8'
+    let crash = false;
     return new Promise((resolve, reject) => {
         let encode = new Ffmpeg()
             .input(link)
@@ -22,15 +23,15 @@ function videoEncode(url, stream) {
             .save(`./output/${stream}.mp4`)
             .on('start', function () {
                 console.log(`Start Encoding: ${stream}`)
-                // setTimeout(function () {
-                //     encode.on('error', function () {
-                //         //console.log('Ffmpeg has been killed');
-                //         resolve('killed', stream)
-                //     });
+                setTimeout(function () {
+                    encode.on('error', function () {
+                        //console.log('Ffmpeg has been killed');
+                        resolve('killed', stream)
+                    });
 
-                //     //stop(encode);
-                //     encode.ffmpegProc.stdin.write('q');
-                // }, 30000);
+                    //stop(encode);
+                    if (!crash) encode.ffmpegProc.stdin.write('q');
+                }, 30000);
             })
             .on('progress', function (progress) {
                 console.log('Processing: ' + stream);
@@ -41,10 +42,12 @@ function videoEncode(url, stream) {
             })
             .on('error', (err) => {
                 //console.log(err)
+                crash = true;
                 reject(`stream: ${stream} error: ${err}`)
             })
             .on('end', () => {
                 //console.log("done")
+                crash = true;
                 resolve('done');
             });
 
@@ -66,15 +69,15 @@ function videoEncode(url, stream) {
 for (let i = 1; i < 6; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
-    fetch(config.url + sub + '.m3u8')
-        .then((response) => {
-            console.log(`Sub ${sub} can reach. Status ${response.status}`)
+    // fetch(config.url + sub + '.m3u8')
+    //     .then((response) => {
+    //         console.log(`Sub ${sub} can reach. Status ${response.status}`)
 
-        })
-        .catch(function (err) {
-            console.log("Unable to fetch -", err);
-        });
-    // videoEncode(config.url, sub)
-    //     .then(result => console.log(result))
-    //     .catch(error => console.log(`stream: ${sub} error: ${error}`))
+    //     })
+    //     .catch(function (err) {
+    //         console.log("Unable to fetch -", err);
+    //     });
+    videoEncode(config.url, sub)
+        .then(result => console.log(result))
+        .catch(error => console.log(`stream: ${sub} error: ${error}`))
 }
