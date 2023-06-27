@@ -29,6 +29,7 @@ function videoEncode(url, stream) {
                     });
 
                     //stop(encode);
+                    console.log('stop', stream)
                     encode.ffmpegProc.stdin.write('q');
                 }, 30000);
             })
