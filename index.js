@@ -22,19 +22,22 @@ function videoEncode(url, stream) {
             .save(`./output/${stream}.mp4`)
             .on('start', function () {
                 console.log(`Start Encoding: ${stream}`)
-                setTimeout(function () {
-                    encode.on('error', function () {
-                        //console.log('Ffmpeg has been killed');
-                        resolve('killed', stream)
-                    });
+                // setTimeout(function () {
+                //     encode.on('error', function () {
+                //         //console.log('Ffmpeg has been killed');
+                //         resolve('killed', stream)
+                //     });
 
-                    //stop(encode);
-                    console.log('stop', stream)
-                    encode.ffmpegProc.stdin.write('q');
-                }, 30000);
+                //     //stop(encode);
+                //     encode.ffmpegProc.stdin.write('q');
+                // }, 30000);
             })
             .on('progress', function (progress) {
                 //console.log('Processing: ');
+            })
+            .on('codecData', function (data) {
+                console.log('Stream ' + stream + ' Input is ' + data.audio + ' audio ' +
+                    'with ' + data.video + ' video');
             })
             .on('error', (err) => {
                 //console.log(err)
@@ -60,7 +63,7 @@ function videoEncode(url, stream) {
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error))
 
-for (let i = 1; i < 20; i++) {
+for (let i = 1; i < 2; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
     videoEncode(config.url, sub)
