@@ -14,7 +14,8 @@ function videoEncode(url, stream) {
                 "-c:v h264_cuvid"
             ])
             .videoCodec("h264_nvenc")
-            .videoFilter("fps=3")
+            .videoFilter("fps=3,hwupload_cuda,scale_npp=640:-1")
+            .noAudio()
             //.native()
             //.audioCodec('aac')
             //.audioBitrate(128)
@@ -66,7 +67,7 @@ function videoEncode(url, stream) {
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error))
 
-for (let i = 1; i < 30; i++) {
+for (let i = 1; i < 6; i++) {
     const num = '000' + i;
     const sub = num.length <= 4 ? num : num.substring(num.length - 4)
     // fetch(config.url + sub + '.m3u8')
